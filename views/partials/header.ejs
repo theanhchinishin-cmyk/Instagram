@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="/css/<%= cssFile %>">
   <% } %>
   <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Immediate Theme Application to prevent flickering
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+        document.body && document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.add('light-mode');
+        document.body && document.body.classList.add('light-mode');
+      }
+    })();
+  </script>
 </head>
 <body>
   

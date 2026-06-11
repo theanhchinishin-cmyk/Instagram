@@ -66,20 +66,40 @@
     --color-bg-secondary: #000000;
     --color-text-primary: #F5F5F5;
     --color-text-secondary: #A8A8A8;
+    --color-text-tertiary: #363636;
     --color-separator: #262626;
     --color-input-bg: #1C1C1E;
     --color-link: #E0F1FF;
+    --shadow-sheet: rgba(255, 255, 255, 0.05) 0px -4px 12px;
   }
 }
 
 /* Override Class for Manual Dark Mode Toggle */
+:root.dark-mode,
 body.dark-mode {
   --color-bg: #000000;
   --color-bg-elevated: #121212;
   --color-bg-secondary: #000000;
   --color-text-primary: #F5F5F5;
   --color-text-secondary: #A8A8A8;
+  --color-text-tertiary: #363636;
   --color-separator: #262626;
   --color-input-bg: #1C1C1E;
   --color-link: #E0F1FF;
+  --shadow-sheet: rgba(255, 255, 255, 0.05) 0px -4px 12px;
+}
+
+/* Override Class for Manual Light Mode Toggle (to break system preference) */
+:root.light-mode,
+body.light-mode {
+  --color-bg: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-secondary: #FAFAFA;
+  --color-text-primary: #000000;
+  --color-text-secondary: #737373;
+  --color-text-tertiary: #C7C7CC;
+  --color-separator: #DBDBDB;
+  --color-input-bg: #EFEFEF;
+  --color-link: #00376B;
+  --shadow-sheet: rgba(0, 0, 0, 0.1) 0px -4px 12px;
 }
