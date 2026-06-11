@@ -1,0 +1,176 @@
+<%- include('partials/header') %>
+
+<style>
+  .create-page-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: var(--space-4);
+    background-color: var(--color-bg);
+  }
+
+  @media (min-width: 768px) {
+    .create-page-container {
+      border: 1px solid var(--color-separator);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+    }
+  }
+
+  .create-header {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-separator);
+    margin-bottom: var(--space-4);
+  }
+
+  .drag-drop-area {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: 2px dashed var(--color-separator);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--color-bg-secondary);
+    transition: border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .drag-drop-area.drag-over {
+    border-color: var(--color-primary);
+  }
+
+  .drag-drop-icon {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .drag-drop-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .drag-drop-subtext {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-1);
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  /* Image Preview */
+  .preview-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  .preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #000;
+  }
+
+  .remove-preview-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #FFF;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background-color 0.2s ease;
+  }
+
+  .remove-preview-btn:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  /* Form controls */
+  .post-form-fields {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .caption-textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    font-size: 14px;
+    resize: none;
+    background-color: var(--color-bg);
+  }
+
+  .caption-textarea:focus {
+    border-color: var(--color-text-secondary);
+  }
+
+  .character-counter {
+    align-self: flex-end;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: -10px;
+  }
+</style>
+
+<div class="create-page-container">
+  <h2 class="create-header">Create new post</h2>
+  
+  <form id="create-post-form" action="/create" method="POST" enctype="multipart/form-data">
+    <!-- Image upload area -->
+    <div id="drop-zone" class="drag-drop-area">
+      <div class="drag-drop-content">
+        <span class="drag-drop-icon">
+          <svg fill="currentColor" height="48" viewBox="0 0 24 24" width="48">
+            <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 10.09V3h2v9.67z"/>
+          </svg>
+        </span>
+        <div class="drag-drop-text">Drag photos and videos here</div>
+        <div class="drag-drop-subtext">Click to select from computer</div>
+      </div>
+      
+      <input type="file" name="image" id="image-input" class="file-input" accept="image/*" required>
+      
+      <!-- Preview -->
+      <div id="preview-box" class="preview-container">
+        <img id="image-preview" src="#" alt="Upload Preview" class="preview-image">
+        <button type="button" id="remove-img-btn" class="remove-preview-btn" aria-label="Remove photo">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Post fields -->
+    <div class="post-form-fields">
+      <textarea name="caption" id="caption-input" placeholder="Write a caption..." class="caption-textarea" maxlength="2200"></textarea>
+      <div class="character-counter"><span id="char-count">0</span>/2200</div>
+      
+      <button type="submit" id="share-btn" class="btn-primary" disabled>Share</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer', { jsFile: 'post.js' }) %>

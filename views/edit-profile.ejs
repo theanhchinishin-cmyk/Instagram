@@ -1,0 +1,169 @@
+<%- include('partials/header') %>
+
+<style>
+  .edit-profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: var(--space-4);
+    background-color: var(--color-bg);
+  }
+
+  @media (min-width: 768px) {
+    .edit-profile-container {
+      border: 1px solid var(--color-separator);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+    }
+  }
+
+  .edit-profile-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+    text-align: center;
+    border-bottom: 1px solid var(--color-separator);
+    padding-bottom: var(--space-3);
+  }
+
+  .avatar-edit-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .current-avatar-preview {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-separator);
+  }
+
+  .avatar-labels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .avatar-username {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .change-photo-btn {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .change-photo-btn:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .file-upload-input {
+    display: none;
+  }
+
+  .edit-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .edit-label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .edit-input {
+    width: 100%;
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    font-size: 14px;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+  }
+
+  .edit-input:focus {
+    border-color: var(--color-text-secondary);
+  }
+
+  .edit-textarea {
+    min-height: 80px;
+    resize: none;
+  }
+
+  .submit-row {
+    margin-top: var(--space-5);
+  }
+</style>
+
+<div class="edit-profile-container">
+  <h2 class="edit-profile-header">Edit profile</h2>
+  
+  <form action="/profile/<%= currentUser.username %>/edit" method="POST" enctype="multipart/form-data">
+    
+    <!-- Avatar Edit -->
+    <div class="avatar-edit-row">
+      <img id="avatar-preview" src="<%= currentUser.avatar %>" alt="Current avatar" class="current-avatar-preview">
+      <div class="avatar-labels">
+        <span class="avatar-username"><%= currentUser.username %></span>
+        <button type="button" id="change-avatar-trigger" class="change-photo-btn">Change profile photo</button>
+        <input type="file" name="avatar" id="avatar-file-input" class="file-upload-input" accept="image/*">
+      </div>
+    </div>
+    
+    <!-- Name Field -->
+    <div class="edit-form-group">
+      <label for="fullName" class="edit-label">Name</label>
+      <input type="text" id="fullName" name="fullName" value="<%= currentUser.full_name %>" placeholder="Name" class="edit-input">
+    </div>
+    
+    <!-- Bio Field -->
+    <div class="edit-form-group">
+      <label for="bio" class="edit-label">Bio</label>
+      <textarea id="bio" name="bio" placeholder="Bio" class="edit-input edit-textarea" maxlength="150"><%= currentUser.bio %></textarea>
+    </div>
+    
+    <!-- Submit Button -->
+    <div class="submit-row">
+      <button type="submit" class="btn-primary" style="width: auto; padding: 8px 24px;">Submit</button>
+    </div>
+    
+  </form>
+</div>
+
+<script>
+  // Dynamic Avatar preview on edit profile page
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('change-avatar-trigger');
+    const input = document.getElementById('avatar-file-input');
+    const preview = document.getElementById('avatar-preview');
+    
+    if (trigger && input && preview) {
+      trigger.addEventListener('click', () => {
+        input.click();
+      });
+      
+      input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            preview.src = event.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
+</script>
+
+<%- include('partials/footer') %>

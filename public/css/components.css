@@ -1,0 +1,514 @@
+/* ==========================================================================
+   TOP NAVIGATION
+   ========================================================================== */
+.top-nav {
+  position: sticky;
+  top: 0;
+  height: 60px;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-separator);
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.top-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 975px;
+  padding: 0 var(--space-4);
+}
+
+.logo-link {
+  font-family: 'Grand Hotel', cursive;
+  font-size: 28px;
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.top-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  transition: transform 0.15s ease;
+}
+
+.nav-btn:active {
+  transform: scale(0.9);
+}
+
+/* ==========================================================================
+   BOTTOM NAVIGATION (MOBILE)
+   ========================================================================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-separator);
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.bottom-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  width: 24%;
+  height: 100%;
+}
+
+.bottom-nav-link:active {
+  transform: scale(0.9);
+}
+
+.bottom-nav .avatar-link img {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid transparent;
+}
+
+.bottom-nav .avatar-link.active img {
+  border-color: var(--color-text-primary);
+}
+
+/* Only show bottom nav on mobile */
+@media (min-width: 935px) {
+  .bottom-nav {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   POST CARD
+   ========================================================================== */
+.post-card {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-separator);
+  width: 100%;
+  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .post-card {
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+  }
+}
+
+.post-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-3);
+}
+
+.post-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.post-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.post-username:hover {
+  opacity: 0.8;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  padding: var(--space-2);
+  transition: transform 0.15s ease;
+}
+
+.btn-icon:active {
+  transform: scale(0.9);
+}
+
+.post-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: var(--color-bg-secondary);
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+}
+
+.post-actions-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.like-btn.liked {
+  color: var(--color-danger);
+}
+
+.post-info {
+  padding: 0 var(--space-3) var(--space-3) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.post-likes {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.post-caption {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.caption-username {
+  font-weight: 600;
+  margin-right: var(--space-2);
+}
+
+.view-comments-link {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.post-comment {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.comment-username {
+  font-weight: 600;
+  margin-right: var(--space-2);
+}
+
+.post-time {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-top: var(--space-1);
+}
+
+/* Comment Composer inside post */
+.add-comment-form {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--color-separator);
+  padding: var(--space-3) 0 var(--space-1) 0;
+  margin-top: var(--space-2);
+}
+
+.comment-input {
+  flex: 1;
+  font-size: 14px;
+}
+
+.comment-post-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.comment-post-btn:not([disabled]) {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   STORY RING
+   ========================================================================== */
+.story-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.story-avatar-container {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.story-ring.unread .story-avatar-container {
+  background: var(--gradient-story-ring);
+  padding: 2.5px;
+}
+
+.story-ring.read .story-avatar-container {
+  border: 1px solid var(--color-separator);
+  padding: 1px;
+}
+
+.story-avatar-container a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.story-avatar-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2.5px solid var(--color-bg);
+  display: block;
+}
+
+.story-ring.read .story-avatar-container img {
+  border: 1px solid var(--color-bg);
+}
+
+.story-username {
+  font-size: 11px;
+  color: var(--color-text-primary);
+  text-align: center;
+  max-width: 74px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: var(--space-2);
+}
+
+/* Stories Rail */
+.stories-rail {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-separator);
+}
+
+.stories-rail::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+@media (min-width: 768px) {
+  .stories-rail {
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+  }
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  display: inline-block;
+  border: 1px solid var(--color-separator);
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   FLOATING HEART ANIMATION (DOUBLE TAP)
+   ========================================================================== */
+.floating-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: var(--color-white);
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.floating-heart.animate {
+  animation: heartBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sheet);
+  border: 1px solid var(--color-separator);
+  font-size: 14px;
+  z-index: var(--z-toast);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 400px;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
+.modal-option {
+  width: 100%;
+  padding: var(--space-4) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-separator);
+  font-size: 14px;
+}
+
+.modal-option:last-child {
+  border-bottom: none;
+}
+
+.modal-option.danger {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   SKELETON LOADING
+   ========================================================================== */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-separator) 37%,
+    var(--color-bg-secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+.skeleton-circle {
+  border-radius: var(--radius-full);
+}
+
+.skeleton-text {
+  height: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.skeleton-rect {
+  border-radius: var(--radius-md);
+}

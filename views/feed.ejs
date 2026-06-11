@@ -1,0 +1,113 @@
+<%- include('partials/header') %>
+
+<div class="feed-layout-container">
+  
+  <!-- Left Main Column (Feed & Stories) -->
+  <section class="feed-main-col">
+    
+    <!-- Stories Rail -->
+    <div class="stories-rail">
+      <!-- Your Story -->
+      <div class="story-ring read">
+        <div class="story-avatar-container">
+          <a href="/profile/<%= currentUser.username %>">
+            <img src="<%= currentUser.avatar %>" alt="Your Story">
+          </a>
+        </div>
+        <span class="story-username">Your Story</span>
+      </div>
+      
+      <!-- Following Stories -->
+      <% if (followingUsers && followingUsers.length > 0) { %>
+        <% followingUsers.forEach((user, index) => { %>
+          <div class="story-ring <%= index % 2 === 0 ? 'unread' : 'read' %>">
+            <div class="story-avatar-container">
+              <a href="/profile/<%= user.username %>">
+                <img src="<%= user.avatar %>" alt="<%= user.username %> story">
+              </a>
+            </div>
+            <span class="story-username"><%= user.username %></span>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+    
+    <!-- Feed Posts -->
+    <div id="posts-feed-container">
+      <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+          <%- include('partials/post-card', { post: post }) %>
+        <% }) %>
+      <% } else { %>
+        <!-- Empty feed state -->
+        <div class="empty-feed-container">
+          <div class="empty-feed-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="64" height="64">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+            </svg>
+          </div>
+          <h2 class="empty-feed-title">Welcome to Instagram</h2>
+          <p class="empty-feed-text">When you follow people, you'll see their photos and videos here. Start by following some of the suggestions on the right.</p>
+        </div>
+      <% } %>
+    </div>
+    
+  </section>
+  
+  <!-- Right Column (Desktop Sidebar Suggestions) -->
+  <aside class="feed-sidebar-col">
+    <!-- Current User Info -->
+    <div class="sidebar-user-card">
+      <div class="sidebar-user-info">
+        <a href="/profile/<%= currentUser.username %>">
+          <img src="<%= currentUser.avatar %>" alt="<%= currentUser.username %> avatar" class="sidebar-avatar">
+        </a>
+        <div class="sidebar-username-container">
+          <a href="/profile/<%= currentUser.username %>" class="sidebar-username"><%= currentUser.username %></a>
+          <span class="sidebar-fullname"><%= currentUser.full_name || currentUser.username %></span>
+        </div>
+      </div>
+      <a href="/logout" class="sidebar-switch-btn">Log Out</a>
+    </div>
+    
+    <!-- Suggestions Header -->
+    <div class="sidebar-suggestions-header">
+      <span class="sidebar-suggestions-title">Suggested for you</span>
+      <a href="/explore" class="sidebar-see-all-btn bold" style="font-size:12px;">See All</a>
+    </div>
+    
+    <!-- Suggestions List -->
+    <div class="suggested-users-list">
+      <% if (suggestedUsers && suggestedUsers.length > 0) { %>
+        <% suggestedUsers.forEach(user => { %>
+          <div class="suggested-user-row" data-user-id="<%= user.id %>">
+            <div class="suggested-user-info">
+              <a href="/profile/<%= user.username %>">
+                <img src="<%= user.avatar %>" alt="<%= user.username %> avatar" class="suggested-avatar">
+              </a>
+              <div class="suggested-names">
+                <a href="/profile/<%= user.username %>" class="suggested-username"><%= user.username %></a>
+                <span class="suggested-subtitle">Popular on Instagram</span>
+              </div>
+            </div>
+            <button class="suggested-follow-btn bold" data-user-id="<%= user.id %>">Follow</button>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <span class="text-secondary" style="font-size: 13px;">No suggestions available</span>
+      <% } %>
+    </div>
+    
+    <!-- Sidebar Footer -->
+    <footer class="sidebar-footer">
+      <div class="sidebar-footer-links">
+        <a href="#">About</a> • <a href="#">Help</a> • <a href="#">Press</a> • <a href="#">API</a> • <a href="#">Jobs</a> • <a href="#">Privacy</a> • <a href="#">Terms</a> • <a href="#">Locations</a>
+      </div>
+      <div>© 2026 INSTAGRAM CLONE BY ANTIGRAVITY</div>
+    </footer>
+  </aside>
+  
+</div>
+
+<%- include('partials/footer', { jsFile: 'feed.js' }) %>

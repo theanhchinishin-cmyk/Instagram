@@ -1,0 +1,40 @@
+# Dependency folders
+node_modules/
+jspm_packages/
+
+# Uploads folder (Tránh up ảnh test lên GitHub)
+public/uploads/*
+!public/uploads/default-avatar.png
+uploads/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Environment variables
+.env
+
+# --- AI & Agent Training Files ---
+# Loại bỏ các folder chứa chỉ dẫn cho AI để bảo mật quy trình thiết kế
+.agents/
+SKILL.md
+skills-lock.json
+instagram/*.md
+Instagram-Clone-App.md
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE/Editor folders
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+check_ejs.js
+cookies.txt

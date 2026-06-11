@@ -1,0 +1,122 @@
+<%- include('partials/header') %>
+
+<div class="profile-container" data-profile-user-id="<%= profileUser.id %>">
+  
+  <!-- Profile Header -->
+  <header class="profile-header">
+    <div class="profile-avatar-wrapper">
+      <img src="<%= profileUser.avatar %>" alt="<%= profileUser.username %> avatar" class="profile-avatar-img">
+    </div>
+    
+    <div class="profile-info">
+      <div class="profile-username-row">
+        <h1 class="profile-username"><%= profileUser.username %></h1>
+        
+        <div class="profile-action-btns">
+          <% if (isOwnProfile) { %>
+            <a href="/profile/<%= currentUser.username %>/edit" class="btn-secondary profile-btn">Edit Profile</a>
+          <% } else { %>
+            <!-- Follow / Following button -->
+            <button id="follow-toggle-btn" class="profile-btn <%= isFollowing ? 'btn-secondary' : 'btn-primary' %>" data-user-id="<%= profileUser.id %>">
+              <%= isFollowing ? 'Following' : 'Follow' %>
+            </button>
+            <button class="btn-secondary profile-btn">Message</button>
+          <% } %>
+        </div>
+      </div>
+      
+      <!-- Stats row (Desktop only) -->
+      <ul class="profile-stats-row">
+        <li class="profile-stat-item"><span class="profile-stat-num"><%= postsCount %></span> posts</li>
+        <li class="profile-stat-item"><span class="profile-stat-num" id="followers-count"><%= followersCount %></span> followers</li>
+        <li class="profile-stat-item"><span class="profile-stat-num" id="following-count"><%= followingCount %></span> following</li>
+      </ul>
+      
+      <!-- Bio details (Desktop & Mobile) -->
+      <div class="profile-bio-container">
+        <span class="profile-fullname"><%= profileUser.full_name || profileUser.username %></span>
+        <% if (profileUser.bio) { %>
+          <p class="profile-bio"><%= profileUser.bio %></p>
+        <% } %>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Stats row (Mobile only) -->
+  <ul class="mobile-profile-stats">
+    <li class="mobile-stat-item">
+      <span class="mobile-stat-num"><%= postsCount %></span>
+      <span class="mobile-stat-label">posts</span>
+    </li>
+    <li class="mobile-stat-item">
+      <span class="mobile-stat-num" id="followers-count-mobile"><%= followersCount %></span>
+      <span class="mobile-stat-label">followers</span>
+    </li>
+    <li class="mobile-stat-item">
+      <span class="mobile-stat-num" id="following-count-mobile"><%= followingCount %></span>
+      <span class="mobile-stat-label">following</span>
+    </li>
+  </ul>
+  
+  <!-- Tab selections -->
+  <div class="profile-tabs-bar">
+    <a href="#" class="profile-tab active" aria-label="Posts grid">
+      <svg fill="currentColor" height="12" viewBox="0 0 24 24" width="12" style="margin-right:6px;">
+        <rect fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18" x="3" y="3"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="9.015" x2="9.015" y1="3" y2="21"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14.985" x2="14.985" y1="3" y2="21"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3" x2="21" y1="9.015" y2="9.015"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3" x2="21" y1="14.985" y2="14.985"/>
+      </svg>
+      Posts
+    </a>
+    <a href="#" class="profile-tab" aria-label="Saved posts">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" height="12" viewBox="0 0 24 24" width="12" style="margin-right:6px;">
+        <polygon points="20 21 12 13.44 4 21 4 3 20 3 20 21"/>
+      </svg>
+      Saved
+    </a>
+  </div>
+  
+  <!-- Photos Grid Section -->
+  <div class="profile-posts-section">
+    <% if (posts && posts.length > 0) { %>
+      <div class="profile-grid">
+        <% posts.forEach(post => { %>
+          <div class="profile-grid-item" onclick="window.location.href='/'"> <!-- Redirects to main feed for details -->
+            <img src="<%= post.image_path %>" alt="Post photo" class="profile-grid-img" loading="lazy">
+            <div class="profile-grid-overlay">
+              <span class="overlay-metric">
+                <svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <span><%= post.likes_count %></span>
+              </span>
+              <span class="overlay-metric">
+                <svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18">
+                  <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="currentColor"/>
+                </svg>
+                <span><%= post.comments_count %></span>
+              </span>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <!-- Empty grid state -->
+      <div class="profile-empty-grid">
+        <div class="profile-empty-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="36" height="36">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+          </svg>
+        </div>
+        <h2 class="profile-empty-title">No Posts Yet</h2>
+        <p class="profile-empty-subtitle">When you share photos, they will appear on your profile.</p>
+      </div>
+    <% } %>
+  </div>
+
+</div>
+
+<%- include('partials/footer', { jsFile: 'profile.js' }) %>

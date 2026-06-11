@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+
+<div class="explore-search-container">
+  
+  <!-- Search Box Row -->
+  <div class="search-box-row">
+    <form class="search-form" action="/explore/search" method="GET">
+      <span class="search-icon-left">
+        <svg fill="currentColor" height="16" viewBox="0 0 24 24" width="16">
+          <path d="M19 10.5A8.5 8.5 0 1 1 10.5 2a8.5 8.5 0 0 1 8.5 8.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="16.511" x2="22" y1="16.511" y2="22"/>
+        </svg>
+      </span>
+      <input type="text" name="q" placeholder="Search" class="search-input" value="<%= query %>" autocomplete="off">
+    </form>
+  </div>
+  
+  <% if (users !== null) { %>
+    <!-- User Search Results Section -->
+    <section class="search-results-section">
+      <h2 class="search-results-title">Accounts</h2>
+      <% if (users.length > 0) { %>
+        <div class="search-users-grid">
+          <% users.forEach(user => { %>
+            <div class="search-user-card" data-user-id="<%= user.id %>">
+              <a href="/profile/<%= user.username %>" class="search-user-info">
+                <img src="<%= user.avatar %>" alt="<%= user.username %> avatar" class="search-user-avatar">
+                <div class="search-user-details">
+                  <span class="search-user-username"><%= user.username %></span>
+                  <span class="search-user-fullname"><%= user.full_name || user.username %></span>
+                </div>
+              </a>
+              <a href="/profile/<%= user.username %>" class="btn-secondary profile-btn" style="width: auto; height: 28px; padding: 0 12px; font-size: 12px;">View Profile</a>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="text-secondary text-center" style="padding: 20px 0;">No accounts found for "<%= query %>"</p>
+      <% } %>
+    </section>
+  <% } %>
+  
+  <!-- Post Grid Section -->
+  <section class="profile-posts-section">
+    <% if (users !== null) { %>
+      <h2 class="search-results-title">Posts</h2>
+    <% } %>
+    
+    <% if (posts && posts.length > 0) { %>
+      <div class="profile-grid">
+        <% posts.forEach(post => { %>
+          <!-- Tile wrapper -->
+          <div class="profile-grid-item" onclick="window.location.href='/profile/<%= post.username %>'">
+            <img src="<%= post.image_path %>" alt="Post by <%= post.username %>" class="profile-grid-img" loading="lazy">
+            <div class="profile-grid-overlay">
+              <span class="overlay-metric">
+                <svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <span><%= post.likes_count %></span>
+              </span>
+              <span class="overlay-metric">
+                <svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18">
+                  <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="currentColor"/>
+                </svg>
+                <span><%= post.comments_count %></span>
+              </span>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="profile-empty-grid">
+        <div class="profile-empty-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="36" height="36">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+          </svg>
+        </div>
+        <h3 class="profile-empty-title" style="font-size: 20px;">No Posts Found</h3>
+        <p class="profile-empty-subtitle">Be the first to upload a post related to this tag!</p>
+      </div>
+    <% } %>
+  </section>
+
+</div>
+
+<%- include('partials/footer') %>

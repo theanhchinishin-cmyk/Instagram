@@ -1,0 +1,199 @@
+/* ==========================================================================
+   FEED LAYOUT
+   ========================================================================== */
+.feed-layout-container {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  max-width: 935px;
+  margin: var(--space-4) auto 0 auto;
+  padding: 0 var(--space-4) 60px var(--space-4);
+}
+
+.feed-main-col {
+  width: 100%;
+  max-width: 614px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar layout (Desktop only) */
+.feed-sidebar-col {
+  display: none;
+  width: 293px;
+  flex-direction: column;
+  position: sticky;
+  top: 84px; /* 60px nav + 24px gap */
+  height: fit-content;
+}
+
+@media (min-width: 935px) {
+  .feed-sidebar-col {
+    display: flex;
+  }
+}
+
+/* Sidebar User Info Card */
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sidebar-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.sidebar-username-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sidebar-fullname {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.sidebar-switch-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Sidebar Suggestions Header */
+.sidebar-suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.sidebar-suggestions-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.sidebar-see-all-btn {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Suggested Users List */
+.suggested-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.suggested-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.suggested-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.suggested-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.suggested-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggested-username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.suggested-username:hover {
+  text-decoration: underline;
+}
+
+.suggested-subtitle {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.suggested-follow-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+}
+
+.suggested-follow-btn:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Sidebar Footer Links */
+.sidebar-footer {
+  margin-top: var(--space-6);
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  line-height: 1.5;
+}
+
+.sidebar-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Empty feed state */
+.empty-feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px var(--space-4);
+  text-align: center;
+}
+
+.empty-feed-icon {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.empty-feed-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.empty-feed-text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  max-width: 350px;
+  margin-bottom: var(--space-4);
+}

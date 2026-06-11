@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up • Instagram</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  
+  <div class="auth-page-wrapper">
+    <div class="auth-card-stack">
+      
+      <div class="auth-box">
+        <h1 class="auth-logo">Instagram</h1>
+        <h2 class="auth-subtitle">Sign up to see photos and videos from your friends.</h2>
+        
+        <form class="auth-form" action="/register" method="POST">
+          <div class="input-wrapper">
+            <input type="email" name="email" placeholder="Email Address" class="auth-input" required autocomplete="email">
+          </div>
+          <div class="input-wrapper">
+            <input type="text" name="fullName" placeholder="Full Name" class="auth-input" required autocomplete="name">
+          </div>
+          <div class="input-wrapper">
+            <input type="text" name="username" placeholder="Username" class="auth-input" required autocomplete="username">
+          </div>
+          <div class="input-wrapper">
+            <input type="password" name="password" placeholder="Password" class="auth-input" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn-primary auth-submit-btn">Sign Up</button>
+          
+          <% if (error) { %>
+            <div class="auth-error"><%= error %></div>
+          <% } %>
+        </form>
+      </div>
+      
+      <div class="auth-toggle-box">
+        <span>Have an account?</span>
+        <a href="/login" class="auth-toggle-link">Log in</a>
+      </div>
+      
+      <div class="auth-download-section">
+        <span class="auth-download-text">Get the app.</span>
+        <div class="auth-download-badges">
+          <img src="/images/appstore.png" alt="App Store Badge" class="auth-download-badge-img">
+          <img src="/images/playstore.png" alt="Google Play Badge" class="auth-download-badge-img">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • Instagram</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  
+  <div class="auth-page-wrapper">
+    <div class="auth-main-container">
+      
+      <!-- Phone Mockup with Screenshot Carousel (Desktop only) -->
+      <div class="auth-mockup-container">
+        <div class="auth-mockup-screen">
+          <img src="/images/screenshot1.png" alt="Screenshot 1" class="auth-mockup-screenshot active">
+          <img src="/images/screenshot2.png" alt="Screenshot 2" class="auth-mockup-screenshot">
+          <img src="/images/screenshot3.png" alt="Screenshot 3" class="auth-mockup-screenshot">
+          <img src="/images/screenshot4.png" alt="Screenshot 4" class="auth-mockup-screenshot">
+        </div>
+      </div>
+      
+      <!-- Auth Boxes -->
+      <div class="auth-card-stack">
+        <div class="auth-box">
+          <h1 class="auth-logo">Instagram</h1>
+          
+          <form class="auth-form" action="/login" method="POST">
+            <div class="input-wrapper">
+              <input type="text" name="identifier" placeholder="Phone number, username, or email" class="auth-input" required autocomplete="username">
+            </div>
+            <div class="input-wrapper">
+              <input type="password" name="password" placeholder="Password" class="auth-input" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-primary auth-submit-btn">Log In</button>
+            
+            <% if (error) { %>
+              <div class="auth-error"><%= error %></div>
+            <% } %>
+          </form>
+          
+          <div class="auth-divider">
+            <span class="auth-divider-text">or</span>
+          </div>
+          
+          <a href="#" class="forgot-password-link">Forgot password?</a>
+        </div>
+        
+        <div class="auth-toggle-box">
+          <span>Don't have an account?</span>
+          <a href="/register" class="auth-toggle-link">Sign up</a>
+        </div>
+        
+        <div class="auth-download-section">
+          <span class="auth-download-text">Get the app.</span>
+          <div class="auth-download-badges">
+            <img src="/images/appstore.png" alt="App Store Badge" class="auth-download-badge-img">
+            <img src="/images/playstore.png" alt="Google Play Badge" class="auth-download-badge-img">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    // Screenshot fade-in/fade-out carousel script
+    document.addEventListener('DOMContentLoaded', () => {
+      const screenshots = document.querySelectorAll('.auth-mockup-screenshot');
+      let currentIndex = 0;
+      
+      setInterval(() => {
+        screenshots[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % screenshots.length;
+        screenshots[currentIndex].classList.add('active');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
