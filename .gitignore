@@ -38,3 +38,5 @@ Thumbs.db
 # Temporary files
 check_ejs.js
 cookies.txt
+
+.gitignore
